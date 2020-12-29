@@ -46,13 +46,21 @@ Plug 'mbbill/undotree'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
+Plug 'rhysd/vim-clang-format'
+
 call plug#end()
+
+let g:clang_format#code_style = "Microsoft"
+
+autocmd FileType c ClangFormatAutoEnable
 
 
 colorscheme gruvbox
 set background=dark
 
 let mapleader = " "
+
+nnoremap <leader>s :w<CR>:ClangFormat<CR>
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
