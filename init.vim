@@ -48,11 +48,13 @@ Plug 'nvim-lua/completion-nvim'
 
 Plug 'rhysd/vim-clang-format'
 
+"Plug 'uplus/vim-clang-rename'
+
 call plug#end()
 
-let g:clang_format#code_style = "Microsoft"
+let g:clang_format#code_style = "Mozilla"
 
-autocmd FileType c ClangFormatAutoEnable
+autocmd FileType c,cpp,hpp ClangFormatAutoEnable
 
 
 colorscheme gruvbox
@@ -60,7 +62,9 @@ set background=dark
 
 let mapleader = " "
 
-nnoremap <leader>s :w<CR>:ClangFormat<CR>
+"au FileType c,cpp nmap <buffer><silent><leader>r <Plug>(clang_rename-current)
+
+nnoremap <leader>r :ClangRenameCurrent<CR>
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -82,3 +86,14 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+
+""go to defintition 
+nnoremap <silent><leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
+""go to implementiation
+nnoremap <silent><leader>gD <cmd>lua vim.lsp.buf.implementation()<CR>
+""go to type
+nnoremap <silent><leader>gt <cmd>lua vim.lsp.buf.type_definition()<CR>
+""go to references
+nnoremap <silent><leader>gr <cmd>lua vim.lsp.buf.references()<CR>
+
