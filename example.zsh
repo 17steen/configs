@@ -15,6 +15,7 @@ alias chvim="nvim ~/.config/nvim/init.vim"
 alias chzsh="nvim ~/.oh-my-zsh/custom"
 
 alias cmpt="cd ~/Programming/Computer/"
+alias c++="cd ~/Programming/C++"
 
 alias vi=nvim
 
