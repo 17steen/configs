@@ -14,6 +14,7 @@ set smartcase
 set noswapfile
 set nobackup
 
+
 set undodir=~/.config/nvim/undodir
 set undofile
 
@@ -43,15 +44,17 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 Plug 'rhysd/vim-clang-format'
 
-"Plug 'uplus/vim-clang-rename'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 
@@ -66,7 +69,10 @@ set background=dark
 
 let mapleader = " "
 
-"au FileType c,cpp nmap <buffer><silent><leader>r <Plug>(clang_rename-current)
+
+
+""bépo specific
+nnoremap é %
 
 
 nnoremap <leader>h :wincmd h<CR>
@@ -102,6 +108,32 @@ inoremap <C-@> <C-Space>
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.sumneko_lua.setup { 
+    \cmd = {"/home/steen/Programming/Utilities/lua-language-server/bin/Linux/lua-language-server", "-E", "/home/steen/Programming/Utilities/lua-language-server/main.lua"};
+    \on_attach=require'completion'.on_attach;
+    \settings = {
+        \Lua = {
+            \runtime = {
+                \version = 'LuaJIT', 
+                \path = vim.split(package.path, ';'),
+            \},
+            \diagnostics = { globals = {'vim'},},
+            \workspace = {
+                \library = {
+                    \[vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    \[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                \},
+            \},
+        \},
+    \},
+\}
+
+""help
+nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 ""go to defintition 
 nnoremap <silent><leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
@@ -110,6 +142,13 @@ nnoremap <silent><leader>gD <cmd>lua vim.lsp.buf.implementation()<CR>
 ""go to type
 nnoremap <silent><leader>gt <cmd>lua vim.lsp.buf.type_definition()<CR>
 ""go to references
-nnoremap <silent><leader>gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent><leader>grr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent><leader>grn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent><leader>gh <cmd>lua vim.lsp.buf.hover()<CR>
+
+""show diagnostics line
+nnoremap <silent><leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
+""format
+nnoremap <silent><leader>s <cmd>w<CR><cmd>lua vim.lsp.buf.formatting()<CR>
 
