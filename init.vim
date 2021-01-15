@@ -56,13 +56,17 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
+Plug 'luochen1990/rainbow'
+
 call plug#end()
+
+let g:rainbow_active = 1
 
 let g:clang_format#code_style = "Mozilla"
 
 autocmd FileType c,cpp,hpp ClangFormatAutoEnable
 
-
+let g:firenvim_config = { 'takeover': 'always' }
 
 colorscheme gruvbox
 set background=dark
@@ -131,6 +135,8 @@ lua require'lspconfig'.sumneko_lua.setup {
         \},
     \},
 \}
+
+let g:rainbow_conf = {'guifgs': ['Yellow', 'LightMagenta', 'LightBlue']}
 
 ""help
 nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
