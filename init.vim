@@ -106,6 +106,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 
+
 inoremap <C-Space> <cmd>Files<CR>
 inoremap <C-@> <C-Space>
 
@@ -135,8 +136,17 @@ lua require'lspconfig'.sumneko_lua.setup {
         \},
     \},
 \}
+lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.elmls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.cssls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.cmake.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.hls.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
+lua require'lspconfig'.sqlls.setup{ on_attach=require'completion'.on_attach, cmd ={"sql-language-server", "up", "--method", "stdio"} }
 
-let g:rainbow_conf = {'guifgs': ['Yellow', 'LightMagenta', 'LightBlue']}
+
+let g:rainbow_conf = {'guifgs': ['Yellow', 'Magenta', 'Blue']}
 
 ""help
 nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
