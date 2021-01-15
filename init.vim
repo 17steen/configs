@@ -14,7 +14,6 @@ set smartcase
 set noswapfile
 set nobackup
 
-
 set undodir=~/.config/nvim/undodir
 set undofile
 
@@ -44,6 +43,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
+Plug 'elmcast/elm-vim'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -58,6 +58,8 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 Plug 'luochen1990/rainbow'
 
+Plug 'ayu-theme/ayu-vim'
+
 call plug#end()
 
 let g:rainbow_active = 1
@@ -68,8 +70,9 @@ autocmd FileType c,cpp,hpp ClangFormatAutoEnable
 
 let g:firenvim_config = { 'takeover': 'always' }
 
-colorscheme gruvbox
-set background=dark
+let ayucolor="dark"
+colorscheme ayu
+"set background=dark
 
 let mapleader = " "
 
@@ -118,15 +121,13 @@ lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.sumneko_lua.setup { 
-    \cmd = {"/home/steen/Programming/Utilities/lua-language-server/bin/Linux/lua-language-server", "-E", "/home/steen/Programming/Utilities/lua-language-server/main.lua"};
-    \on_attach=require'completion'.on_attach;
+    \on_attach=custom_attach,
     \settings = {
         \Lua = {
-            \runtime = {
-                \version = 'LuaJIT', 
-                \path = vim.split(package.path, ';'),
-            \},
-            \diagnostics = { globals = {'vim'},},
+            \runtime = { version = 'LuaJIT', path = vim.split(package.path, ';'), },
+            \completion = { keywordSnippet = 'enable', },
+            \diagnostics = { enable = true, globals = 
+                \{'vim', 'describe', 'it', 'before_each', 'after_each'},},
             \workspace = {
                 \library = {
                     \[vim.fn.expand('$VIMRUNTIME/lua')] = true,
@@ -141,12 +142,12 @@ lua require'lspconfig'.elmls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.cssls.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.cmake.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.hls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.pyright.setup{ on_attach=require'completion'.on_attach }
 lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.sqlls.setup{ on_attach=require'completion'.on_attach, cmd ={"sql-language-server", "up", "--method", "stdio"} }
+lua require'lspconfig'.sqlls.setup{ on_attach=require'completion'.on_attach, cmd ={'sql-language-server', 'up', '--method', 'stdio'} }
+lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
 
 
-let g:rainbow_conf = {'guifgs': ['Yellow', 'Magenta', 'Blue']}
+let g:rainbow_conf = {'guifgs': ['Yellow', 'LightMagenta', 'LightBlue']}
 
 ""help
 nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
