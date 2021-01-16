@@ -60,6 +60,8 @@ Plug 'luochen1990/rainbow'
 
 Plug 'ayu-theme/ayu-vim'
 
+Plug 'ARM9/arm-syntax-vim'
+
 call plug#end()
 
 let g:rainbow_active = 1
@@ -67,6 +69,9 @@ let g:rainbow_active = 1
 let g:clang_format#code_style = "Mozilla"
 
 autocmd FileType c,cpp,hpp ClangFormatAutoEnable
+
+""tells vim that .s files are going to use arm syntax
+au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
 
 let g:firenvim_config = { 'takeover': 'always' }
 
