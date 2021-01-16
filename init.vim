@@ -79,7 +79,9 @@ let mapleader = " "
 
 
 ""bépo specific
-nnoremap é %
+noremap é %
+""C-^ does not exist and C-é doesn't work
+noremap <Space>é <C-^>
 
 
 nnoremap <leader>h :wincmd h<CR>
@@ -99,6 +101,9 @@ nnoremap <silent> <leader>f <cmd>Files<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
+"" disable annoying highlight after a search :
+nnoremap <silent><leader>n <cmd>noh<CR>
+
 
 "" in order to use completion with tab
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -110,8 +115,7 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 
 
-inoremap <C-Space> <cmd>Files<CR>
-inoremap <C-@> <C-Space>
+
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
