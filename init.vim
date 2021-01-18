@@ -23,7 +23,7 @@ set scrolloff=8
 set noshowmode
 
 set completeopt=menuone,noinsert,noselect
-
+set wildmode=longest,list,full
 set shortmess+=c
 
 set signcolumn=yes
@@ -62,6 +62,8 @@ Plug 'ayu-theme/ayu-vim'
 
 Plug 'ARM9/arm-syntax-vim'
 
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+ 
 call plug#end()
 
 let g:rainbow_active = 1
@@ -81,10 +83,9 @@ colorscheme ayu
 
 let mapleader = " "
 
-
-
 ""bépo specific
 noremap é %
+lnoremap ’ '
 ""C-^ does not exist and C-é doesn't work
 noremap <Space>é <C-^>
 
@@ -96,7 +97,8 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>q :wincmd q<CR>
 nnoremap <leader>v :wincmd v<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+"" don’t use it really
+"nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <silent> <leader>- :vertical resize -5<CR>
 nnoremap <silent> <leader>+ :vertical resize +5<CR>
 
@@ -118,6 +120,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "" copy to clipboard (if available)
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
+
+"" paste from clipboard (if available)
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
 
 
 
