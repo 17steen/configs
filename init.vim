@@ -89,6 +89,8 @@ lnoremap ’ '
 ""C-^ does not exist and C-é doesn't work
 noremap <Space>é <C-^>
 
+""quicksave
+nnoremap <leader>w :w<CR>
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
