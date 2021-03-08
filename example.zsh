@@ -9,13 +9,13 @@
 # cd $brainstormr
 #
 
-schooldir="/mnt/c/Users/Stéén/OneDrive - Enseignement de la Province de Liège/COURS 2EM"
-alias school="cd \"$schooldir\""
 alias chvim="nvim ~/.config/nvim/init.vim"
-alias chzsh="nvim ~/.oh-my-zsh/custom"
+alias chzsh="nvim ~/Configs/example.zsh"
 
-alias cmpt="cd ~/Programming/Computer/"
-alias c++="cd ~/Programming/C++"
+alias chss="cd ~/Programming/chess/"
+
+
+alias gtk="cd /home/steen/Programming/gtk/"
 
 alias vi=nvim
 
@@ -23,5 +23,9 @@ alias mk=make -j8
 
 alias xrdp-start="sudo /etc/init.d/xrdp start"
 alias xrdp-stop="sudo /etc/init.d/xrdp stop"
+
+export MOZ_ENABLE_WAYLAND=1
+
+export CMAKE_TOOLCHAIN_FILE="/usr/share/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 #source "/home/steen/emsdk/emsdk_env.sh"

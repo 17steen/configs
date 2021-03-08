@@ -92,6 +92,8 @@ noremap <Space>é <C-^>
 ""quicksave
 nnoremap <leader>w :w<CR>
 
+if !exists('g:vscode')
+
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
@@ -113,6 +115,8 @@ let $FZF_DEFAULT_OPTS='--reverse'
 "" disable annoying highlight after a search :
 nnoremap <silent><leader>n <cmd>noh<CR>
 
+endif
+
 
 "" in order to use completion with tab
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -128,7 +132,7 @@ nnoremap <leader>p "+p
 vnoremap <leader>p "+p
 
 
-
+if !exists('g:vscode')
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
@@ -185,4 +189,6 @@ nnoremap <silent><leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<C
 
 ""format
 nnoremap <silent><leader>s <cmd>w<CR><cmd>lua vim.lsp.buf.formatting()<CR>
+
+endif
 
