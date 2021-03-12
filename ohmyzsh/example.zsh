@@ -19,6 +19,8 @@ alias gtk="cd /home/steen/Programming/gtk/"
 
 alias vi=nvim
 
+alias pi="ssh pi@192.168.0.69"
+
 alias mk=make -j8
 
 alias xrdp-start="sudo /etc/init.d/xrdp start"
