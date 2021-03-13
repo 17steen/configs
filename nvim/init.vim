@@ -70,7 +70,9 @@ let g:rainbow_active = 1
 
 let g:clang_format#code_style = "Mozilla"
 
-autocmd FileType c,cpp,hpp ClangFormatAutoEnable
+autocmd FileType h,c,cpp,hpp ClangFormatAutoEnable
+"""autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.mjs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.formatting_sync(nil, 100)
 
 ""tells vim that .s files are going to use arm syntax
 au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
@@ -134,41 +136,10 @@ vnoremap <leader>p "+p
 
 if !exists('g:vscode')
 
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.vimls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.jsonls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.sumneko_lua.setup { 
-    \on_attach=custom_attach,
-    \settings = {
-        \Lua = {
-            \runtime = { version = 'LuaJIT', path = vim.split(package.path, ';'), },
-            \completion = { keywordSnippet = 'enable', },
-            \diagnostics = { enable = true, globals = 
-                \{'vim', 'describe', 'it', 'before_each', 'after_each'},},
-            \workspace = {
-                \library = {
-                    \[vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    \[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                \},
-            \},
-        \},
-    \},
-\}
-lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.elmls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.cssls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.cmake.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.hls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.rust_analyzer.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.sqlls.setup{ on_attach=require'completion'.on_attach, cmd ={'sql-language-server', 'up', '--method', 'stdio'} }
-lua require'lspconfig'.jedi_language_server.setup{ on_attach=require'completion'.on_attach }
-
-
 let g:rainbow_conf = {'guifgs': ['Yellow', 'LightMagenta', 'LightBlue']}
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+luafile ~/.config/nvim/lsp.lua
 
 ""help
 nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -183,12 +154,16 @@ nnoremap <silent><leader>gt <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent><leader>grr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent><leader>grn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent><leader>gh <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent><leader>ge <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 ""show diagnostics line
 nnoremap <silent><leader>e <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 ""format
 nnoremap <silent><leader>s <cmd>w<CR><cmd>lua vim.lsp.buf.formatting()<CR>
+
+""switch between headers c++
+nnoremap <silent><leader>c <cmd>ClangdSwitchSourceHeader<CR>
 
 endif
 
