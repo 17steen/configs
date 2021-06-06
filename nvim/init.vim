@@ -47,6 +47,8 @@ Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'elmcast/elm-vim'
 
+Plug 'alaviss/nim.nvim'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
@@ -148,6 +150,7 @@ let g:rainbow_conf = {'guifgs': ['Yellow', 'LightMagenta', 'LightBlue']}
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 luafile ~/.config/nvim/lsp.lua
+luafile ~/.config/nvim/discord.lua
 
 ""help
 nnoremap <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
