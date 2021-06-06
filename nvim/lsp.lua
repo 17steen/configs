@@ -1,48 +1,46 @@
 local lspconfig = require'lspconfig'
 local completion = require'completion'
 
---lspconfig.clangd.setup{ on_attach=completion.on_attach }
---
---lspconfig.tsserver.setup{ on_attach=completion.on_attach }
---
---lspconfig.vimls.setup{ on_attach=completion.on_attach }
---
---lspconfig.jsonls.setup{ on_attach=completion.on_attach }
---
---lspconfig.bashls.setup{ on_attach=completion.on_attach }
---
---lspconfig.html.setup{ on_attach=completion.on_attach }
---
---lspconfig.elmls.setup{ on_attach=completion.on_attach }
---
---lspconfig.cssls.setup{ on_attach=completion.on_attach }
---
---lspconfig.cmake.setup{ on_attach=completion.on_attach }
---
---lspconfig.hls.setup{ on_attach=completion.on_attach }
---
---lspconfig.rust_analyzer.setup{ on_attach=completion.on_attach }
---
---lspconfig.sqlls.setup{ on_attach=completion.on_attach }
---
---lspconfig.jedi_language_server.setup{ on_attach=completion.on_attach }
-
-local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html", "elmls", "cssls", "cmake", "hls", "rust_analyzer", "sqlls", "jedi_language_server"}
+local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
+    "elmls", "cssls", "cmake", "hls", "sqlls", "jedi_language_server",
+    "texlab", "ocamllsp",
+}
 
 for _,lsp in ipairs(servers) do
     lspconfig[lsp].setup{ on_attach=completion.on_attach}
 end
 
+lspconfig.rust_analyzer.setup{
+    on_attach=completion.on_attach,
+    cmd = { "rust-analyzer" },
+    filetypes = { "rust" },
+    root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importMergeBehavior = "last",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+}
 
 
-local sumneko_root_path = "/home/" .. "steen" .. "/.config/nvim/lua-language-server"
-
-local sumneko_bin = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
 lspconfig.omnisharp.setup{
     on_attach=completion.on_attach,
     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
 }
+
+local sumneko_root_path = "/home/" .. "steen" .. "/.config/nvim/lua-language-server"
+
+local sumneko_bin = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
 lspconfig.sumneko_lua.setup {
     on_attach=completion.on_attach,

@@ -17,14 +17,13 @@ set nobackup
 set undodir=~/.config/nvim/undodir
 set undofile
 
-set termguicolors
 set scrolloff=8
 
 set noshowmode
 
-set completeopt=menuone,noinsert,noselect
 set wildmode=longest,list,full
 set shortmess+=c
+set completeopt=menuone,noinsert,noselect
 
 set signcolumn=yes
 
@@ -35,8 +34,11 @@ set updatetime=50
 set incsearch
 set expandtab
 set colorcolumn=80
+
+set termguicolors
 highlight ColorColumn ctermbg=0 guibg=lightrey
 
+let g:asmsyntax = 'nasm'
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -63,8 +65,14 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'ARM9/arm-syntax-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
- 
+
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' } 
+
+Plug 'andweeb/presence.nvim'
+
 call plug#end()
+
+let g:livepreview_engine = 'xelatex'
 
 let g:rainbow_active = 1
 
