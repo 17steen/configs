@@ -3,7 +3,7 @@ local completion = require'completion'
 
 local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
     "elmls", "cssls", "cmake", "hls", "sqlls", "jedi_language_server",
-    "texlab", "ocamllsp",
+    "texlab", "ocamllsp", "gopls",
 }
 
 for _,lsp in ipairs(servers) do
