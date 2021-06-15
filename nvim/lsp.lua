@@ -10,6 +10,9 @@ for _,lsp in ipairs(servers) do
     lspconfig[lsp].setup{ on_attach=completion.on_attach}
 end
 
+local USER = vim.fn.expand("$USER");
+
+
 lspconfig.rust_analyzer.setup{
     on_attach=completion.on_attach,
     cmd = { "rust-analyzer" },
@@ -38,13 +41,13 @@ lspconfig.omnisharp.setup{
     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
 }
 
-local sumneko_root_path = "/home/" .. "steen" .. "/.config/nvim/lua-language-server"
+--local sumneko_root_path = "/home/" .. "steen" .. "/.config/nvim/lua-language-server"
 
-local sumneko_bin = sumneko_root_path .. "/bin/Linux/lua-language-server"
+--local sumneko_bin = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
 lspconfig.sumneko_lua.setup {
     on_attach=completion.on_attach,
-    cmd = { sumneko_bin, "-E", sumneko_root_path .. "/main.lua"},
+    cmd = { "/home/"..USER.."/.local/share/nvim/lspinstall/lua/sumneko-lua-language-server" },
     settings = {
         Lua = {
             runtime = {

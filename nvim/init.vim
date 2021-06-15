@@ -53,6 +53,7 @@ Plug 'alaviss/nim.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'kabouzeid/nvim-lspinstall'
 
 Plug 'rhysd/vim-clang-format'
 
