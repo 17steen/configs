@@ -1,16 +1,37 @@
 local lspconfig = require'lspconfig'
 local completion = require'completion'
+local lspinstall = require'lspinstall'
 
 local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
     "elmls", "cssls", "cmake", "hls", "sqlls", "jedi_language_server",
     "texlab", "ocamllsp", "gopls", "dartls",
 }
 
+vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
+
 for _,lsp in ipairs(servers) do
     lspconfig[lsp].setup{ on_attach=completion.on_attach}
 end
 
-local USER = vim.fn.expand("$USER");
+
+-- doing this makes lua go funky, so i just set her up manually
+--[[
+local function setup_servers()
+    lspinstall.setup()
+    local install_servers = lspinstall.installed_servers()
+    for _,lsp in ipairs(install_servers) do
+        lspconfig[lsp].setup{ on_attach=completion.on_attach}
+    end
+end
+
+--setup_servers()
+
+require'lspinstall'.post_install_hook = function ()
+  --setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+
+--]]
 
 
 lspconfig.rust_analyzer.setup{
@@ -41,9 +62,7 @@ lspconfig.omnisharp.setup{
     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
 }
 
---local sumneko_root_path = "/home/" .. "steen" .. "/.config/nvim/lua-language-server"
-
---local sumneko_bin = sumneko_root_path .. "/bin/Linux/lua-language-server"
+local USER = vim.fn.expand("$USER")
 
 lspconfig.sumneko_lua.setup {
     on_attach=completion.on_attach,
@@ -62,8 +81,10 @@ lspconfig.sumneko_lua.setup {
             }
         }
     }
+
 }
 
+--[[
 lspconfig.efm.setup {
     init_options = { documentFormatting = true},
     filetypes = {"lua"},
@@ -79,3 +100,4 @@ lspconfig.efm.setup {
         }
     }
 }
+--]]
