@@ -42,6 +42,8 @@ let g:asmsyntax = 'nasm'
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'dart-lang/dart-vim-plugin'
+
 Plug 'morhetz/gruvbox'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'

@@ -9,13 +9,20 @@
 # cd $brainstormr
 #
 
-alias chvim="nvim ~/.config/nvim/init.vim"
-alias chzsh="nvim ~/Configs/example.zsh"
+source /etc/profile
+
+export PATH=/opt/texlive/2021/bin/x86_64-linux/:$PATH
+
+export PATH="$PATH:/home/steen/Programming/ScriptGenius/bin"
+
+alias chvim="nvim ~/.config/nvim"
+alias chzsh="nvim ~/Configs/ohmyzsh/example.zsh"
 
 alias chss="cd ~/Programming/chess/"
 
 
 alias gtk="cd /home/steen/Programming/gtk/"
+alias gorust="cd /home/steen/Programming/rust"
 
 alias vi=nvim
 
@@ -30,4 +37,5 @@ export MOZ_ENABLE_WAYLAND=1
 
 export CMAKE_TOOLCHAIN_FILE="/usr/share/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
-#source "/home/steen/emsdk/emsdk_env.sh"
+
+alias srcemsdk="source \"/home/steen/emsdk/emsdk_env.sh\""
