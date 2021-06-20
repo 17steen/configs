@@ -37,6 +37,12 @@ if not vim.g.vscode then
 
 	--disable annoying highlighting
 	Keymap_silent('n', '<leader>n', '<cmd>noh<CR>')
-
+else
+   --vscode specific
+   lol.xd = 0
+   Keymap('x', '<leader>gc', '<Plug>VsCodeCommentary')
+   Keymap('n', '<leader>gc', '<Plug>VsCodeCommentary')
+   Keymap('o', '<leader>gc', '<Plug>VsCodeCommentary')
+   Keymap('n', 'gcc', '<Plug>VsCodeCommentary')
 end
 

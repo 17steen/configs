@@ -18,12 +18,16 @@ packer.init({
 })
 
 packer.startup(function()
+    --limits annoying warnings
+    local use = use
     use 'gruvbox-community/gruvbox'
 
     use 'mbbill/undotree'
     use 'elmcast/elm-vim'
 
     use 'alaviss/nim.nvim'
+
+    use 'habamax/vim-godot'
 
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/completion-nvim'

@@ -43,7 +43,7 @@ Keymap_silent('n', '<leader>s', ':w<CR><cmd>lua vim.lsp.buf.formatting()<CR>')
 Keymap_silent('n', '<leader>c', ':ClangdSwitchSourceHeader<CR>')
 
 --code action
-Keymap_silent('n', '<leader>a', ':lua vim.lsp.buf.code_action()<CR>')
+Keymap_silent('n', '<leader>ga', ':lua vim.lsp.buf.code_action()<CR>')
 
 
 

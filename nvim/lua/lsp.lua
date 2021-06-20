@@ -1,6 +1,6 @@
 local lspconfig = require'lspconfig'
 local completion = require'completion'
-local lspinstall = require'lspinstall'
+--local lspinstall = require'lspinstall'
 
 local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
     "elmls", "cssls", "cmake", "hls", "sqlls", "jedi_language_server",
@@ -84,20 +84,3 @@ lspconfig.sumneko_lua.setup {
 
 }
 
---[[
-lspconfig.efm.setup {
-    init_options = { documentFormatting = true},
-    filetypes = {"lua"},
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
-                    formatStdin = true
-                }
-            }
-        }
-    }
-}
---]]

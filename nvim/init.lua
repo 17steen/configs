@@ -1,16 +1,17 @@
 vim.g.mapleader = ' '
 
-vim.cmd 'syntax on'
 
 require'general-options'
 require'general-keybinds'
 
--- for the coloured (){}[]
-vim.g.rainbowactive = true
+--vim.api.nvim_set_keymap('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>", {})
 
-require'plugins'
+if  vim.g.vscode == nil then --not in vscode
+    vim.g.VAR = "set in neovim" --what?
 
-if not vim.g.vscode then
+    vim.cmd 'syntax on'
+
+    require'plugins'
 	require'lsp'
     require'lsp-keybinds'
 
@@ -42,7 +43,10 @@ if not vim.g.vscode then
 
     require'treesitter-config'
 
+    vim.cmd 'colorscheme ayu'
+else
+    vim.g.VAR = "set in vscode"
+    --local km = vim.api.nvim_set_keymap
+    km('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>")
+    --vscode specific configuration
 end
-
-vim.cmd 'colorscheme ayu'
-

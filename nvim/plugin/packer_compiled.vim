@@ -141,6 +141,10 @@ _G.packer_plugins = {
   undotree = {
     loaded = true,
     path = "/home/steen/.local/share/nvim/site/pack/packer/start/undotree"
+  },
+  ["vim-godot"] = {
+    loaded = true,
+    path = "/home/steen/.local/share/nvim/site/pack/packer/start/vim-godot"
   }
 }
 
