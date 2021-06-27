@@ -1,6 +1,5 @@
 vim.g.mapleader = ' '
 
-
 require'general-options'
 require'general-keybinds'
 
