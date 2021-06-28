@@ -3,10 +3,11 @@ vim.g.mapleader = ' '
 require'general-options'
 require'general-keybinds'
 
+vim.g.VAR = "hello !" --what?
+
 --vim.api.nvim_set_keymap('n', 'z=', "<Cmd>call VSCodeNotify('keyboard-quickfix.openQuickFix')<CR>", {})
 
 if  vim.g.vscode == nil then --not in vscode
-    vim.g.VAR = "set in neovim" --what?
 
     vim.cmd 'syntax on'
 
@@ -43,6 +44,10 @@ if  vim.g.vscode == nil then --not in vscode
     require'treesitter-config'
 
     vim.cmd 'colorscheme ayu'
+
+    vim.cmd 'highlight ColorColumn ctermbg=0 guibg=lightrey'
+    vim.cmd 'highlight LspDiagnosticsDefaultError guifg=#FF0000'
+
 else
     vim.g.VAR = "set in vscode"
     --local km = vim.api.nvim_set_keymap

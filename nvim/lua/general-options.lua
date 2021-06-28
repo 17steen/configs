@@ -10,6 +10,7 @@ vim.o.smartindent = true
 vim.o.number = true
 vim.o.smartcase = true
 vim.o.wrap = false
+vim.o.showmode = false
 
 vim.o.backup = false
 vim.o.swapfile = false
@@ -39,4 +40,3 @@ vim.o.termguicolors = true
 
 vim.g.asmsyntax = 'nasm'
 
-vim.cmd 'highlight ColorColumn ctermbg=9 guibg=lightrey'
