@@ -21,7 +21,9 @@ set $term kitty
 # this is really shit imo
 # doesn't look at .desktop files so no flatpak ……
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu nwggrid -f -p
+
+exec nwggrid-server
+set $menu nwggrid -client -f -p
 
 set $file-manager gtk-launch $(xdg-mime query default inode/directory)
 #set $file-manager xdg-open $HOME
@@ -43,6 +45,7 @@ exec mkfifo $SWAYSOCK.wob && tail -f $WOBSOCK | wob
 
 #notifications
 exec mako
+exec polkit-dumb-agent
 
 #only useful on lappy
 output * {
