@@ -33,6 +33,17 @@ end
 
 --]]
 
+require'lspconfig'.fsautocomplete.setup{
+    on_attach=completion.on_attach,
+    cmd = { "dotnet", "tool", "run", "fsautocomplete", "--background-service-enabled" },
+    filetypes = { "fsharp" },
+   init_options = {
+      AutomaticWorkspaceInit = true
+    },
+    root_dir = function(startpath)
+        return M.search_ancestors(startpath, matcher)
+    end
+}
 
 lspconfig.rust_analyzer.setup{
     on_attach=completion.on_attach,
