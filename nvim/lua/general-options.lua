@@ -12,6 +12,8 @@ vim.o.smartcase = true
 vim.o.wrap = false
 vim.o.showmode = false
 
+vim.o.mouse = 'a'
+
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.undodir="/home/steen/.config/nvim/undodir"

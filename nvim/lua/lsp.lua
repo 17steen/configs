@@ -9,8 +9,14 @@ local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
 
 vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 for _,lsp in ipairs(servers) do
-    lspconfig[lsp].setup{ on_attach=completion.on_attach}
+    lspconfig[lsp].setup{
+        on_attach = completion.on_attach,
+        capabilities = capabilities
+    }
 end
 
 

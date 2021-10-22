@@ -13,8 +13,8 @@ function _G.tab_backwards()
 end
 
 
-Keymap_expr('i', '<Tab>', 'v:lua.tab_forwards()')
-Keymap_expr('i', '<S-Tab>', 'v:lua.tab_backwards()')
+--Keymap_expr('i', '<Tab>', 'v:lua.tab_forwards()')
+--Keymap_expr('i', '<S-Tab>', 'v:lua.tab_backwards()')
 
 
 --go to defintition
