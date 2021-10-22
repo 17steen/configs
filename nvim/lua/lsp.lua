@@ -1,6 +1,10 @@
 local lspconfig = require'lspconfig'
-local completion = require'completion'
+local completion = require'cmp_nvim_lsp'
 --local lspinstall = require'lspinstall'
+--
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = completion.update_capabilities(capabilities)
 
 local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
     "elmls", "cssls", "cmake", "hls", "sqlls", "jedi_language_server",
@@ -10,11 +14,10 @@ local servers = { "clangd", "tsserver", "vimls", "jsonls", "bashls", "html",
 vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = completion.update_capabilities(capabilities)
 
 for _,lsp in ipairs(servers) do
     lspconfig[lsp].setup{
-        on_attach = completion.on_attach,
         capabilities = capabilities
     }
 end
@@ -40,19 +43,19 @@ end
 --]]
 
 require'lspconfig'.fsautocomplete.setup{
-    on_attach=completion.on_attach,
-    cmd = { "dotnet", "tool", "run", "fsautocomplete", "--background-service-enabled" },
+    capabilities = capabilities,
+    cmd = { "dotnet", "fsautocomplete", "--background-service-enabled" },
     filetypes = { "fsharp" },
    init_options = {
       AutomaticWorkspaceInit = true
     },
-    root_dir = function(startpath)
-        return M.search_ancestors(startpath, matcher)
-    end
+    --root_dir = function(startpath)
+    --    return M.search_ancestors(startpath, matcher)
+    --end
 }
 
 lspconfig.rust_analyzer.setup{
-    on_attach=completion.on_attach,
+    capabilities = capabilities,
     cmd = { "rust-analyzer" },
     filetypes = { "rust" },
     root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
@@ -75,14 +78,14 @@ lspconfig.rust_analyzer.setup{
 
 
 lspconfig.omnisharp.setup{
-    on_attach=completion.on_attach,
+    capabilities = capabilities,
     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
 }
 
 local USER = vim.fn.expand("$USER")
 
 lspconfig.sumneko_lua.setup {
-    on_attach=completion.on_attach,
+    capabilities = capabilities,
     cmd = { "/home/"..USER.."/.local/share/nvim/lspinstall/lua/sumneko-lua-language-server" },
     settings = {
         Lua = {

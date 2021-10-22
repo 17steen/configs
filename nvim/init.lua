@@ -14,7 +14,7 @@ if  vim.g.vscode == nil then --not in vscode
     require'plugins'
 	require'lsp'
     require'lsp-keybinds'
-    require'cmp-settings'
+    --require'cmp_settings'
 
     --rainbow [](){}
     vim.g.rainbow_active = true
