@@ -14,7 +14,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+#set $term $(gsettings get org.gnome.desktop.default-applications.terminal exec)
+set $term x-terminal-emulator
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -27,6 +28,8 @@ set $menu nwggrid -client -f -p
 
 set $file-manager gtk-launch $(xdg-mime query default inode/directory)
 #set $file-manager xdg-open $HOME
+
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 #https://github.com/francma/wob
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
@@ -45,11 +48,14 @@ exec mkfifo $SWAYSOCK.wob && tail -f $WOBSOCK | wob
 
 #notifications
 exec mako
-exec polkit-dumb-agent
+exec /usr/lib/polkit-1/polkit-agent-helper-1
+
+set $background $(find $HOME/Backgrounds/ -type f | shuf -n 1)
+
 
 #only useful on lappy
 output * {
-    bg $HOME/Backgrounds/Destruction.jpg fill
+    bg $background fill
     scale 1.25 
 }
 
@@ -285,18 +291,18 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    swaybar_command waybar
-    #position top
+    #swaybar_command waybar
+    position top
 
-    ## When the status_command prints a new line to stdout, swaybar updates.
-    ## The default just shows the current date and time.
-    #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
 
-    #colors {
-    #    statusline #ffffff
-    #    background #323232
-    #    inactive_workspace #32323200 #32323200 #5c5c5c
-    #}
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 
 include /etc/sway/config.d/*
